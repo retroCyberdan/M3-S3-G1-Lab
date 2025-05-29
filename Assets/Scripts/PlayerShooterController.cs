@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerShooterController : MonoBehaviour
 {
-    {SerializeField] private float _fireRate;
+    [SerializeField] private float _fireRate;
     [SerializeField] private float _fireRange;
 
     
