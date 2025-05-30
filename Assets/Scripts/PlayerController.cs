@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speed = 10;
     [SerializeField] Rigidbody2D _rb;
 
+    float h;
+    float v;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,12 +17,16 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        h = Input.GetAxis("Horizontal"); // <- acquisisco gli inpu in Update
+        v = Input.GetAxis("Vertical");
+    }
 
-        if(h != 0 || v != 0)
+    // FixedUpdate is called once per frame
+    void FixedUpdate()
+    {        
+        if(h != 0 || v != 0) // <- gestisco la fisica in FixedUpdate
         {
             Vector2 dir = new Vector2(h, v); // <- creo un vettore direzione
 
@@ -28,6 +35,7 @@ public class PlayerController : MonoBehaviour
             if(length > 1)
             {
                 dir /= length; // <- normalizzo il vettore se la lunghezza è > di 1
+                //dir.Normalize(); // <- posso farlo anche tramite metodo o in fase di dichiarazione del vettore tramite ".Normalized"
             }
 
             _rb.MovePosition(_rb.position + dir * (_speed * Time.deltaTime)); // <- eseguo il movimento tramite Rigidbody2D
